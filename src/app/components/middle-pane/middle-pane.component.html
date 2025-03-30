@@ -1,0 +1,159 @@
+<ng-container *ngIf="selectedGroup; else noGroupSelected">
+  <div class="group-header">
+    <div class="header-content">
+      <h2>{{ selectedGroup.name }}</h2>
+      <p class="description" *ngIf="!selectedGroup.description">Add description...</p>
+      <p class="description" *ngIf="selectedGroup.description">{{ selectedGroup.description }}</p>
+    </div>
+    
+    <div class="element-actions">
+      <button mat-icon-button (click)="openEditDialog(selectedGroup, $event)" aria-label="Edit field group">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="duplicateGroup(selectedGroup.id, $event)" aria-label="Duplicate field group">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteGroup(selectedGroup.id, $event)" aria-label="Delete field group">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+
+  <div 
+    cdkDropList
+    id="form-elements"
+    [cdkDropListData]="selectedGroup.elements"
+    [cdkDropListConnectedTo]="['available-elements']"
+    (cdkDropListDropped)="onDrop($event)"
+    class="form-elements-container"
+  >
+    <ng-container *ngIf="selectedGroup.elements.length > 0; else emptyFormElements">
+      <div 
+        *ngFor="let element of selectedGroup.elements"
+        cdkDrag
+        [cdkDragData]="element"
+        class="form-element"
+        [class.active]="selectedElementId === element.id"
+      >
+        <div class="element-header">
+          <div class="element-type-icon">
+            <mat-icon cdkDragHandle>drag_indicator</mat-icon>
+          </div>
+          
+          <div class="element-info">
+            <div class="element-name">{{ element.name }}</div>
+          </div>
+          
+          <div class="element-actions">
+            <button mat-icon-button (click)="openElementProperties(element, $event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="duplicateElement(element.id, $event)">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteElement(element.id, $event)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        
+        <div class="element-preview">
+          <ng-container [ngSwitch]="element.type">
+
+            <div *ngSwitchCase="'text-single'" class="preview-field">
+              <input type="text" [placeholder]="element.placeholder || 'Enter customer\'s email'" class="preview-input">
+            </div>
+
+            <div *ngSwitchCase="'text-number'" class="preview-field">
+              <input type="number" [placeholder]="element.placeholder || 'Enter here'" class="preview-input">
+            </div>
+            
+            <div *ngSwitchCase="'text-multi'" class="preview-field">
+              <textarea [placeholder]="element.placeholder || 'Type here...'" class="preview-textarea"></textarea>
+            </div>
+            
+            <div *ngSwitchCase="'date'" class="preview-field">
+              <input type="date" placeholder="Select date..." class="preview-input">
+              <mat-icon class="preview-icon">calendar_today</mat-icon>
+            </div>
+            
+            <div *ngSwitchCase="'dropdown'" class="preview-field">
+              <select class="preview-select">
+                <option>{{ element.placeholder || 'Select an option...' }}</option>
+                <ng-container *ngIf="element.options && element.options.length > 0">
+                  <option *ngFor="let option of element.options" [value]="option.value">{{ option.label }}</option>
+                </ng-container>
+              </select>
+              <mat-icon class="preview-icon">arrow_drop_down</mat-icon>
+            </div>
+            
+            <div *ngSwitchCase="'datetime'" class="preview-field">
+              <input type="datetime-local" class="preview-input">
+              <mat-icon class="preview-icon">schedule</mat-icon>
+            </div>
+            
+            <div *ngSwitchCase="'single-select'" class="preview-field">
+              <div class="radio-group">
+                <ng-container *ngIf="element.options && element.options.length > 0">
+                  <div *ngFor="let option of element.options" class="radio-option">
+                    <input type="radio" [name]="'radio-' + element.id" [id]="'radio-' + element.id + '-' + option.value">
+                    <label [for]="'radio-' + element.id + '-' + option.value">{{ option.label }}</label>
+                  </div>
+                </ng-container>
+                <div *ngIf="!element.options || element.options.length === 0" class="radio-option">
+                  <input type="radio" [name]="'radio-' + element.id" [id]="'radio-' + element.id + '-sample'">
+                  <label [for]="'radio-' + element.id + '-sample'">Sample option</label>
+                </div>
+              </div>
+            </div>
+            
+            <div *ngSwitchCase="'multi-select'" class="preview-field">
+              <div class="checkbox-group">
+                <ng-container *ngIf="element.options && element.options.length > 0">
+                  <div *ngFor="let option of element.options" class="checkbox-option">
+                    <input type="checkbox" [id]="'checkbox-' + element.id + '-' + option.value">
+                    <label [for]="'checkbox-' + element.id + '-' + option.value">{{ option.label }}</label>
+                  </div>
+                </ng-container>
+                <div *ngIf="!element.options || element.options.length === 0" class="checkbox-option">
+                  <input type="checkbox" [id]="'checkbox-' + element.id + '-sample'">
+                  <label [for]="'checkbox-' + element.id + '-sample'">Sample option</label>
+                </div>
+              </div>
+            </div>
+            
+            <div *ngSwitchCase="'media-upload'" class="preview-field">
+              <div class="media-upload-container">
+                <input type="file" [id]="'file-' + element.id" class="file-input">
+                <label [for]="'file-' + element.id" class="file-label">
+                  <mat-icon>cloud_upload</mat-icon>
+                  <span>{{ element.placeholder || 'Click to upload a file' }}</span>
+                </label>
+              </div>
+            </div>
+            
+            <div *ngSwitchDefault class="preview-field">
+              <p class="text-gray-400">{{ element.type }} field</p>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+    
+    <ng-template #emptyFormElements>
+      <div class="empty-elements-placeholder">
+        <mat-icon>dashboard_customize</mat-icon>
+        <p>Drag form elements here</p>
+      </div>
+    </ng-template>
+  </div>
+</ng-container>
+
+<ng-template #noGroupSelected>
+  <div class="no-group-selected">
+    <mat-icon>info</mat-icon>
+    <p>Select a field group from the left panel to start building your form.</p>
+  </div>
+</ng-template>
+

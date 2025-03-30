@@ -1,0 +1,205 @@
+<div class="elements-container">
+  <div class="elements-search-container">
+    <div class="search-box">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input type="text" placeholder="Search anything" class="search-input">
+    </div>
+  </div>
+
+  <div class="elements-list" 
+    cdkDropList
+    id="available-elements"
+    [cdkDropListData]="availableElements"
+    [cdkDropListConnectedTo]="['form-elements']"
+    (cdkDropListDropped)="onDrop($event)">
+    
+    <div class="element-category">
+      <h3 class="category-title">TEXT</h3>
+      
+      <div class="element-item" 
+        cdkDrag
+        [cdkDragData]="getElementByType('text-single')"
+        (cdkDragStarted)="onDragStarted($event)"
+        (cdkDragEnded)="onDragEnded($event)">
+        <div class="element-icon">
+          <mat-icon>short_text</mat-icon>
+        </div>
+        <div class="element-info">
+          <h4 class="element-title">Single Line Text</h4>
+          <p class="element-description">Single text area</p>
+        </div>
+        
+        <div *cdkDragPreview class="element-drag-preview">
+          <mat-icon>short_text</mat-icon>
+          <span>Single Line Text</span>
+        </div>
+      </div>
+      
+      <div class="element-item" 
+        cdkDrag
+        [cdkDragData]="getElementByType('text-multi')"
+        (cdkDragStarted)="onDragStarted($event)"
+        (cdkDragEnded)="onDragEnded($event)">
+        <div class="element-icon">
+          <mat-icon>notes</mat-icon>
+        </div>
+        <div class="element-info">
+          <h4 class="element-title">Multi Line Text</h4>
+          <p class="element-description">Multi text area</p>
+        </div>
+        
+        <div *cdkDragPreview class="element-drag-preview">
+          <mat-icon>notes</mat-icon>
+          <span>Multi Line Text</span>
+        </div>
+      </div>
+      
+      <div class="element-item" 
+        cdkDrag
+        [cdkDragData]="getElementByType('text-number')"
+        (cdkDragStarted)="onDragStarted($event)"
+        (cdkDragEnded)="onDragEnded($event)">
+        <div class="element-icon">
+          <mat-icon>123</mat-icon>
+        </div>
+        <div class="element-info">
+          <h4 class="element-title">Integer</h4>
+          <p class="element-description">Integer type area</p>
+        </div>
+        
+        <div *cdkDragPreview class="element-drag-preview">
+          <mat-icon>123</mat-icon>
+          <span>Integer</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="element-category">
+      <h3 class="category-title">DATE</h3>
+      
+      <div class="element-item" 
+        cdkDrag
+        [cdkDragData]="getElementByType('date')"
+        (cdkDragStarted)="onDragStarted($event)"
+        (cdkDragEnded)="onDragEnded($event)"
+        data-element-type="date">
+        <div class="element-icon">
+          <mat-icon>calendar_today</mat-icon>
+        </div>
+        <div class="element-info">
+          <h4 class="element-title">Date</h4>
+          <p class="element-description">Select date from datepicker</p>
+        </div>
+        
+        <div *cdkDragPreview class="element-drag-preview">
+          <mat-icon>calendar_today</mat-icon>
+          <span>Date</span>
+        </div>
+      </div>
+      
+      
+      <div class="element-item" 
+        cdkDrag
+        [cdkDragData]="getElementByType('datetime')"
+        (cdkDragStarted)="onDragStarted($event)"
+        (cdkDragEnded)="onDragEnded($event)">
+        <div class="element-icon">
+          <mat-icon>event</mat-icon>
+        </div>
+        <div class="element-info">
+          <h4 class="element-title">Date & Time</h4>
+          <p class="element-description">Select date & time from picker</p>
+        </div>
+        
+        <div *cdkDragPreview class="element-drag-preview">
+          <mat-icon>event</mat-icon>
+          <span>Date & Time</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="element-category">
+      <h3 class="category-title">MULTI</h3>
+      
+      <div class="element-item" 
+        cdkDrag
+        [cdkDragData]="getElementByType('single-select')"
+        (cdkDragStarted)="onDragStarted($event)"
+        (cdkDragEnded)="onDragEnded($event)">
+        <div class="element-icon">
+          <mat-icon>radio_button_checked</mat-icon>
+        </div>
+        <div class="element-info">
+          <h4 class="element-title">Single Selection</h4>
+          <p class="element-description">Select single option</p>
+        </div>
+        
+        <div *cdkDragPreview class="element-drag-preview">
+          <mat-icon>radio_button_checked</mat-icon>
+          <span>Single Selection</span>
+        </div>
+      </div>
+      
+      <div class="element-item" 
+        cdkDrag
+        [cdkDragData]="getElementByType('multi-select')"
+        (cdkDragStarted)="onDragStarted($event)"
+        (cdkDragEnded)="onDragEnded($event)">
+        <div class="element-icon">
+          <mat-icon>check_box</mat-icon>
+        </div>
+        <div class="element-info">
+          <h4 class="element-title">Multi Selection</h4>
+          <p class="element-description">Select multiple options</p>
+        </div>
+        
+        <div *cdkDragPreview class="element-drag-preview">
+          <mat-icon>check_box</mat-icon>
+          <span>Multi Selection</span>
+        </div>
+      </div>
+      
+      <div class="element-item" 
+        cdkDrag
+        [cdkDragData]="getElementByType('dropdown')"
+        (cdkDragStarted)="onDragStarted($event)"
+        (cdkDragEnded)="onDragEnded($event)">
+        <div class="element-icon">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </div>
+        <div class="element-info">
+          <h4 class="element-title">Dropdown</h4>
+          <p class="element-description">Select options from dropdown</p>
+        </div>
+        
+        <div *cdkDragPreview class="element-drag-preview">
+          <mat-icon>arrow_drop_down</mat-icon>
+          <span>Dropdown</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="element-category">
+      <h3 class="category-title">MEDIA</h3>
+      
+      <div class="element-item" 
+        cdkDrag
+        [cdkDragData]="getElementByType('media-upload')"
+        (cdkDragStarted)="onDragStarted($event)"
+        (cdkDragEnded)="onDragEnded($event)">
+        <div class="element-icon">
+          <mat-icon>cloud_upload</mat-icon>
+        </div>
+        <div class="element-info">
+          <h4 class="element-title">Upload</h4>
+          <p class="element-description">Upload documents/media files</p>
+        </div>
+        
+        <div *cdkDragPreview class="element-drag-preview">
+          <mat-icon>cloud_upload</mat-icon>
+          <span>Upload</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

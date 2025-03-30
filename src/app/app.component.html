@@ -1,0 +1,32 @@
+<div class="form-builder-container">
+  <div class="panel left-panel">
+    <div class="panel-heading">
+      <h2>Field Groups</h2>
+      <button mat-flat-button color="primary" class="create-new-btn" aria-label="Create new field group" (click)="createNewFieldGroup()">
+        <mat-icon>add_circle_outline</mat-icon>
+        Create new
+      </button>
+    </div>
+    
+    <div class="field-group-list">
+      <app-left-pane></app-left-pane>
+    </div>
+  </div>
+  
+
+  <div class="panel middle-panel">
+    <app-middle-pane></app-middle-pane>
+  </div>
+  
+
+  <div class="panel right-panel">
+    <div class="panel-heading">
+      <h2>Elements</h2>
+    </div>
+    
+    <app-right-pane></app-right-pane>
+  </div>
+  
+
+  <app-right-drawer></app-right-drawer>
+</div>

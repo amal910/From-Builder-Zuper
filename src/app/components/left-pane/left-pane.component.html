@@ -1,0 +1,31 @@
+<div class="field-group-list">
+  <ng-container *ngIf="fieldGroups.length > 0; else noGroups">
+    <div class="field-group-item" 
+         *ngFor="let group of fieldGroups"
+         [class.active]="selectedGroupId === group.id"
+         (click)="selectGroup(group.id)">
+      <div class="flex-1">
+        <div class="flex items-center">
+          <mat-icon class="mr-2 text-gray-500">menu</mat-icon>
+          <span>{{ group.name }}</span>
+        </div>
+      </div>
+      
+      <div class="element-actions">
+        <button mat-icon-button (click)="openEditDialog(group, $event)" aria-label="Edit field group">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteGroup(group.id, $event)" aria-label="Delete field group">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #noGroups>
+    <div class="flex flex-col items-center justify-center p-6 text-center">
+      <mat-icon class="text-gray-300 mb-4" style="font-size: 48px; width: 48px; height: 48px;">folder_open</mat-icon>
+      <p class="text-gray-500 mb-4">No field groups created yet.</p>
+    </div>
+  </ng-template>
+</div>

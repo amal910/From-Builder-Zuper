@@ -1,0 +1,85 @@
+<div class="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden" [class]="getElementTypeClass()">
+  <div class="flex items-center p-3 border-b border-gray-100 bg-gray-50">
+    <mat-icon class="text-gray-500 mr-2">{{ getElementIcon() }}</mat-icon>
+    <span class="text-xs bg-blue-100 text-blue-800 rounded-full px-2 py-1">{{ element.type }}</span>
+    <span class="ml-2 text-xs bg-red-100 text-red-800 rounded-full px-2 py-1" *ngIf="element.required">Required</span>
+  </div>
+  
+  <div class="p-4">
+    <h3 class="text-base font-medium mb-1">{{ element.name }}</h3>
+    <p class="text-sm text-gray-500 mb-4" *ngIf="element.description">{{ element.description }}</p>
+    
+    <div [ngSwitch]="element.type">
+
+      <mat-form-field *ngSwitchCase="'text-single'" appearance="outline" class="w-full">
+        <mat-label>{{ element.name }}</mat-label>
+        <input matInput [placeholder]="element.placeholder || ''" [required]="element.required">
+        <mat-hint *ngIf="element.description">{{ element.description }}</mat-hint>
+      </mat-form-field>
+      
+      <mat-form-field *ngSwitchCase="'text-multi'" appearance="outline" class="w-full">
+        <mat-label>{{ element.name }}</mat-label>
+        <textarea matInput [placeholder]="element.placeholder || ''" [required]="element.required" rows="3" class="resize-none"></textarea>
+        <mat-hint *ngIf="element.description">{{ element.description }}</mat-hint>
+      </mat-form-field>
+      
+      <mat-form-field *ngSwitchCase="'date'" appearance="outline" class="w-full">
+        <mat-label>{{ element.name }}</mat-label>
+        <input matInput [matDatepicker]="picker" [required]="element.required">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint *ngIf="element.description">{{ element.description }}</mat-hint>
+      </mat-form-field>
+      
+      <mat-form-field *ngSwitchCase="'datetime'" appearance="outline" class="w-full">
+        <mat-label>{{ element.name }}</mat-label>
+        <input matInput [matDatepicker]="datetimePicker" [required]="element.required">
+        <mat-datepicker-toggle matSuffix [for]="datetimePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datetimePicker></mat-datepicker>
+        <mat-hint *ngIf="element.description">{{ element.description }}</mat-hint>
+      </mat-form-field>
+      
+      <mat-form-field *ngSwitchCase="'dropdown'" appearance="outline" class="w-full">
+        <mat-label>{{ element.name }}</mat-label>
+        <mat-select [required]="element.required">
+          <mat-option *ngFor="let option of element.options" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="element.description">{{ element.description }}</mat-hint>
+      </mat-form-field>
+      
+      <div *ngSwitchCase="'single-select'" class="w-full">
+        <div class="text-sm font-medium mb-2">{{ element.name }}</div>
+        <mat-radio-group class="flex flex-col space-y-2">
+          <mat-radio-button *ngFor="let option of element.options" [value]="option.value">
+            {{ option.label }}
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="text-xs text-gray-500 mt-1" *ngIf="element.description">{{ element.description }}</div>
+      </div>
+      
+      <div *ngSwitchCase="'multi-select'" class="w-full">
+        <div class="text-sm font-medium mb-2">{{ element.name }}</div>
+        <div class="flex flex-col space-y-2">
+          <mat-checkbox *ngFor="let option of element.options" [value]="option.value">
+            {{ option.label }}
+          </mat-checkbox>
+        </div>
+        <div class="text-xs text-gray-500 mt-1" *ngIf="element.description">{{ element.description }}</div>
+      </div>
+      
+      <div *ngSwitchCase="'media-upload'" class="w-full">
+        <div class="text-sm font-medium mb-2">{{ element.name }}</div>
+        <div class="flex items-center space-x-3">
+          <button mat-stroked-button type="button" class="flex items-center space-x-1">
+            <mat-icon class="text-gray-600">cloud_upload</mat-icon>
+            <span>Choose File</span>
+          </button>
+          <span class="text-sm text-gray-500">No file chosen</span>
+        </div>
+        <div class="text-xs text-gray-500 mt-1" *ngIf="element.description">{{ element.description }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+.element-wrapper {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.element-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.element-icon {
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.element-type {
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.54);
+  text-transform: capitalize;
+}
+
+.required-badge {
+  margin-left: auto;
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.element-body {
+  padding: 16px;
+}
+
+.element-name {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.element-description {
+  margin: 0 0 16px;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.element-preview {
+  margin-top: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+// Apply different colors based on element type
+.element-type-text-single .element-header { border-left: 4px solid #4CAF50; }
+.element-type-text-multi .element-header { border-left: 4px solid #8BC34A; }
+.element-type-date .element-header { border-left: 4px solid #2196F3; }
+.element-type-datetime .element-header { border-left: 4px solid #03A9F4; }
+.element-type-dropdown .element-header { border-left: 4px solid #9C27B0; }
+.element-type-single-select .element-header { border-left: 4px solid #673AB7; }
+.element-type-multi-select .element-header { border-left: 4px solid #3F51B5; }
+.element-type-media-upload .element-header { border-left: 4px solid #FF5722; }
+
+// Selection fields
+.select-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-label {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.checkbox-group,
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+mat-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.54);
+  margin-top: 4px;
+}
+
+// Upload field
+.upload-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-label {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.upload-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.upload-info {
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.54);
+}

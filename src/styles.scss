@@ -1,0 +1,325 @@
+
+/* You can add global styles to this file, and also import other style files */
+
+// @import "tailwindcss";
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f7f9;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0.8;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-snack-bar-container {
+  &.success-snackbar {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  &.error-snackbar {
+    background-color: #f44336;
+    color: white;
+  }
+}
+
+.field-property-dialog {
+  .mat-mdc-dialog-container {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .mat-mdc-dialog-surface {
+    padding: 0;
+  }
+  
+  .mdc-dialog__content {
+    padding-top: 8px;
+  }
+}
+
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-hint {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+
+.form-builder-container {
+  display: grid;
+  grid-template-columns: minmax(200px, 20%) minmax(400px, 1fr) minmax(250px, 25%);
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f5f7f9;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: 230px 1fr 270px;
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: auto;
+    min-height: 100vh;
+  }
+}
+
+.panel {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+  background-color: white;
+  border-right: 1px solid #e0e0e0;
+  
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 200px;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 16px;
+  }
+}
+
+.panel-heading {
+  // display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.left-panel {
+  .field-group-list {
+    margin-top: 16px;
+  }
+  
+  .field-group-item {
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    
+    &:hover {
+      background-color: #f5f5f5;
+    }
+    
+    &.active {
+      background-color: #e3f2fd;
+      border-left: 3px solid #2196f3;
+    }
+  }
+  
+  .create-new-btn {
+    color: #2196f3;
+    font-weight: 500;
+  }
+}
+
+.middle-panel {
+  background-color: #f5f7f9;
+  border-right: 0;
+  
+  .group-header {
+    background-color: white;
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    
+    h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    
+    .description {
+      color: #666;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+  }
+  
+  .form-elements-container {
+    min-height: 200px;
+  }
+  
+  .form-element {
+    background-color: white;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    cursor: pointer;
+    
+    &:hover {
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    
+    &.active {
+      border: 1px solid #2196f3;
+    }
+    
+    .element-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .element-label {
+      font-weight: 500;
+    }
+    
+    .element-actions {
+      visibility: hidden;
+    }
+    
+    &:hover .element-actions {
+      visibility: visible;
+    }
+  }
+}
+
+.right-panel {
+  .elements-search {
+    margin-bottom: 16px;
+    width: 100%;
+    
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+  
+  .elements-category {
+    margin-bottom: 24px;
+    
+    .category-title {
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 500;
+      color: #757575;
+      margin-bottom: 8px;
+    }
+  }
+  
+  .element-type-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    
+    &:hover {
+      background-color: #f1f1f1;
+    }
+    
+    .element-icon {
+      margin-right: 12px;
+      color: #616161;
+    }
+    
+    .element-info {
+      .element-name {
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+      
+      .element-description {
+        font-size: 12px;
+        color: #757575;
+      }
+    }
+  }
+}
+
+.btn-primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.mt-4 {
+  margin-top: 16px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.text-xs {
+  font-size: 12px;
+}
+
+.text-gray {
+  color: #757575;
+}
+
+.bg-gray-100 {
+  background-color: #f5f7f9;
+}
+
+.rounded {
+  border-radius: 4px;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
