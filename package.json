@@ -31,5 +31,8 @@
     "tslib": "^2.8.1",
     "typescript": "^5.8.2",
     "zone.js": "^0.15.0"
+  },
+  "devDependencies": {
+    "@ngx-env/builder": "^19.0.4"
   }
 }
